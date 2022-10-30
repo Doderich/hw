@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:hw/screens/main_screen.dart';
+import 'styles.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: _theme(),
+      home: MainScreen(),
+    );
+  }
+
+  ThemeData _theme() {
+    return ThemeData(
+      appBarTheme: const AppBarTheme(
+        toolbarTextStyle: AppBarTitleStyle,
+        titleTextStyle: AppBarTextStyle,
       ),
-      home: Scaffold(),
+      textTheme: const TextTheme(
+        labelMedium: ButtonTextStyle,
+        titleLarge: CaptionTextStyle,
+        bodyMedium: BodyMediumTextStyle,
+      ),
+      primarySwatch: Colors.green,
     );
   }
 }
