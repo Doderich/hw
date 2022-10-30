@@ -43,8 +43,8 @@ const TextStyle BodyMediumTextStyle = TextStyle(
 );
 const TextStyle CaptionTextStyle = TextStyle(
   fontFamily: FontNameDefault,
-  fontWeight: FontWeight.w300,
-  fontSize: LargeTextSize,
+  fontWeight: FontWeight.w600,
+  fontSize: 100.0,
   color: TextColorLight,
 );
 const TextStyle ButtonTextStyle = TextStyle(

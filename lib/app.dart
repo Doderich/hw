@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hw/screens/main_screen.dart';
+import 'package:hw/screens/page_select.dart';
+import 'package:hw/screens/student_select/main_screen.dart';
 import 'styles.dart';
 
 class MyApp extends StatelessWidget {
@@ -8,7 +9,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: _theme(),
-      home: MainScreen(),
+      home: PageSelect(),
+      debugShowCheckedModeBanner: false,
     );
   }
 
