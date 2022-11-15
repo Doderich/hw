@@ -11,8 +11,6 @@ final user = FirebaseAuth.instance.currentUser;
 
 class MainScreen extends StatefulWidget {
   @override
-  var docid;
-  MainScreen(this.docid);
   State<MainScreen> createState() => _MainScreenState();
 }
 
