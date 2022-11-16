@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hw/models/student.dart';
 
 class ListStudentElm extends StatefulWidget {
-  final int studentId;
-  final String studentName;
-  final int studentCount;
+  final Student student;
 
-  ListStudentElm(this.studentId, this.studentName, this.studentCount);
+  const ListStudentElm({super.key, required this.student});
 
   @override
   State<ListStudentElm> createState() => _ListStudentElmState();
@@ -20,7 +19,7 @@ class _ListStudentElmState extends State<ListStudentElm> {
         child: ListTile(
           tileColor: _selected ? Colors.green[300] : null,
           title: Text(
-            'Student Name ${widget.studentId}',
+            widget.student.name,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           trailing: Icon(

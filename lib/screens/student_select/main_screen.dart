@@ -1,15 +1,19 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:hw/models/student.dart';
+import 'package:hw/urls.dart';
+import 'dart:convert';
 import 'cust_drop_down_button.dart';
 import 'list_student_elm.dart';
 
-final usersRef = FirebaseFirestore.instance.collection('Users');
-final db = FirebaseFirestore.instance;
-final user = FirebaseAuth.instance.currentUser;
-
 class MainScreen extends StatefulWidget {
+  final Client client = Client();
+  List<Student> students = [];
+
+  MainScreen({
+    Key? key,
+  }) : super(key: key);
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -32,27 +36,22 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     //print(widget.docid);
     //getclasses(widget.docid);
+    getStudents();
     super.initState();
   }
 
-  getclasses() async {
-    var docsnap = await usersRef.doc(widget.docid).get();
-    Map<String, dynamic>? data = docsnap.data();
-    var value = data?['classes'];
-    List<String> classesid = [];
-    for (int i = 0; i < value.length; i++) {
-      DocumentReference<Map<String, dynamic>> tempRef = value[i];
-      classesid.add(tempRef.path);
-      getClassNameById(tempRef.path);
-    }
-    print(_classes);
-  }
+  getClasses() {}
 
-  void getClassNameById(String documentPath) async {
-    var docsnap = await db.doc(documentPath).get();
-    Map<String, dynamic>? data = docsnap.data();
-    print(data?['class']);
-    _classes.add(data?['class']);
+  void getStudents() async {
+    widget.students = [];
+    print('ah yes i will retrive');
+    List response = json.decode((await widget.client.get(retriveURL)).body);
+    print('HM thats some tastey data');
+    response.forEach((element) {
+      widget.students.add(Student.fromMap(element));
+    });
+    print(widget.students);
+    setState(() {});
   }
 
   void choiceAction(String choice) {}
@@ -83,9 +82,7 @@ class _MainScreenState extends State<MainScreen> {
         actions: [
           Icon(Icons.navigation),
           GestureDetector(
-            onTap: (() {
-              FirebaseAuth.instance.signOut();
-            }),
+            onTap: (() {}),
             child: Icon(Icons.logout),
           )
         ],
@@ -97,7 +94,7 @@ class _MainScreenState extends State<MainScreen> {
           ConstrainedBox(
             constraints: BoxConstraints(maxWidth: 200.0, maxHeight: 200.0),
             child: FutureBuilder(
-                future: getclasses(),
+                future: getClasses(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
                     return Text('Pls wait');
@@ -130,10 +127,11 @@ class _MainScreenState extends State<MainScreen> {
               maxHeight: 200,
             ),
             child: ListView.builder(
-              itemCount: items.length,
+              itemCount: widget.students.length,
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              itemBuilder: (context, index) =>
-                  ListStudentElm(index, 'Student Name', 1),
+              itemBuilder: (context, index) => ListStudentElm(
+                student: widget.students[index],
+              ),
             ),
           ),
           /*
