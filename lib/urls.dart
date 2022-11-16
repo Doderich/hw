@@ -1,28 +1,28 @@
 Uri retriveURL = Uri(
   //http://notestestapplication.herokuapp.com/notes/s
   scheme: 'https',
-  host: 'notestestapplication.herokuapp.com',
-  path: '/notes/',
+  host: 'hwbackendapi.herokuapp.com',
+  path: '/students/',
 );
 
 Uri createURL = Uri(
   scheme: 'https',
-  host: 'notestestapplication.herokuapp.com',
-  path: '/notes/create/',
+  host: 'hwbackendapi.herokuapp.com',
+  path: '/students/create/',
 );
 
 Uri deleteURL(int id) {
   return Uri(
     scheme: 'https',
-    host: 'notestestapplication.herokuapp.com',
-    path: '/notes/' + id.toString() + '/delete/',
+    host: 'hwbackendapi.herokuapp.com',
+    path: '/students/' + id.toString() + '/delete/',
   );
 }
 
 Uri updateURL(int id) {
   return Uri(
     scheme: 'https',
-    host: 'notestestapplication.herokuapp.com',
-    path: '/notes/' + id.toString() + '/update/',
+    host: 'hwbackendapi.herokuapp.com',
+    path: '/students/' + id.toString() + '/update/',
   );
 }
