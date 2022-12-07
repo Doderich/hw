@@ -1,7 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hw/screens/login_page/forgot_password.dart';
 
@@ -24,15 +20,10 @@ class _LoginPageState extends State<LoginPage> {
         return Center(child: CircularProgressIndicator());
       },
     );
-
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-    } on FirebaseAuthException catch (e) {
-      print(e);
-    }
+    var string = {
+      'email': _emailController.text.trim(),
+      'password': _passwordController.text.trim(),
+    };
     Navigator.of(context).pop();
   }
 
